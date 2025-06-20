@@ -7,7 +7,7 @@ function class(...)
   local function searchBases(key)
     for _, base in ipairs(bases) do
       if base[key] then
-          return base[key]
+        return base[key]
       end
     end
   end
