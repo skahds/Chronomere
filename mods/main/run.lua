@@ -4,6 +4,19 @@ system.on("@update", function ()
       ent:update()
     end
   end
+
+  for i=#main.deleteQueue, 1, -1 do
+    local ent = main.deleteQueue[i]
+    local entIndex = ent.index
+    if ent.index ~= #main.world then
+      local lastEnt = main.world[#main.world]
+      main.world[entIndex] = lastEnt
+      lastEnt.index = entIndex
+    end
+
+    table.remove(main.world, #main.world)
+  end
+  main.deleteQueue = {}
 end)
 
 system.on("@renderer:render", function ()

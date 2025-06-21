@@ -3,6 +3,7 @@ main.deleteQueue = {}
 
 function main.spawnEntity(id, args, ret)
   table.insert(main.world, main.entities[id]:new(args))
+  main.world[#main.world].index = #main.world
 
   if ret then
     return main.world[#main.world]
@@ -20,6 +21,14 @@ function main.checkEntCollision(ent1, ent2, tag)
       if usedTags[checkTag] then
         return true
       end
+    end
+  end
+end
+
+function main.forAllEntCollision(ent, tag, func)
+  for _, targEnt in pairs(main.world) do
+    if ent.index ~= targEnt.index and main.checkEntCollision(ent, targEnt, tag) then
+      func(targEnt)
     end
   end
 end

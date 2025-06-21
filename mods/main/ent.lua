@@ -37,5 +37,14 @@ function basicEnt:draw()
 end
 
 function basicEnt:delete()
-  table.insert(main.deleteQueue, self)
+  local isIn = false
+  for _, ent in pairs(main.deleteQueue) do
+    if ent.index == main.deleteQueue then
+      isIn = true
+    end
+  end
+  
+  if isIn == false then
+    table.insert(main.deleteQueue, self)
+  end
 end
