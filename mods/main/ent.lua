@@ -18,23 +18,27 @@ function basicEnt:init(args)
   self.height = self.height or self.defaultHeight or 0
   self.tag = self.tag or {}
   self.cameraFixed = self.cameraFixed or false
+  self.renderLayer = self.renderLayer or 1
 end
 
 function basicEnt:draw()
-  local renderLayer = self.renderLayer or 1
-  if self.color then
-    love.graphics.setColor(self.color)
-  end
-  if self.image then
-    local image = system.getImage(self.image)
-    system.render(renderLayer, function ()
-      love.graphics.draw(image, self.x, self.y)
-    end, self.cameraFixed)
-  else
-    system.render(renderLayer, function ()
-      love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
-    end, self.cameraFixed)
-  end
+  local renderLayer = self.renderLayer
+  system.render(renderLayer, function ()
+
+    if self.color then
+      love.graphics.setColor(self.color)
+    else
+      love.graphics.setColor(1, 1, 1)
+    end
+
+    if self.image then
+      local image = system.getImage(self.image)
+        love.graphics.draw(image, self.x, self.y)
+    else
+        love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
+    end
+
+  end, self.cameraFixed)
 end
 
 function basicEnt:delete()
@@ -47,5 +51,6 @@ function basicEnt:delete()
   
   if isIn == false then
     table.insert(main.deleteQueue, self)
+    system.call("main:entityDeleted", self)
   end
 end

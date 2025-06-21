@@ -26,8 +26,8 @@ system.on("@renderer:render", function ()
         t.func()
       end
       
-      love.graphics.setColor(1, 1, 1)
     end
+    love.graphics.setColor(1, 1, 1)
   end
   
 
