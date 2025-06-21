@@ -7,5 +7,5 @@ system.on("@load", function ()
     -- targEnt:delete()
   end)
 
-  main.ui.spawnUI("card", {x=400, y=200, card="moveRook"})
+  main.ui.spawnUI("draw_card", {x=400, y=150, card="moveRook"})
 end)

@@ -39,9 +39,9 @@ function main.ui.defineUI(id, eType)
 
       if self.image then
         local image = system.getImage(self.image)
-          love.graphics.draw(image, self.x, self.y)
+        love.graphics.draw(image, self.x, self.y)
       else
-          love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
+        love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
       end
 
     end, self.cameraFixed)

@@ -1,8 +1,10 @@
 system.on("@mouse:released", function (button)
   for _, ent in pairs(main.ui.world) do
-    if ent.onClicked then
-      -- no need to check AABB, just have it check it themself for flexibility
-      ent.onClicked(ent, button)
+    local mouse = system.getStorage("realMouse")
+    if main.AABB_check(ent, mouse) then
+      if ent.onClicked then
+        ent.onClicked(ent, button)
+      end
     end
   end
 end)

@@ -2,7 +2,7 @@ local cam = {x=0, y=0, zoom = 1}
 
 function cam:start()
   love.graphics.push()
-  local screenWidth, screenHeight = love.graphics.getDimensions()
+  local screenWidth, screenHeight = system.getStorage("screenDimension").w, system.getStorage("screenDimension").h
 
   --translate to the middle of the screen
   love.graphics.translate(screenWidth/2, screenHeight/2)
@@ -31,7 +31,7 @@ function cam:followPos(pos)
 end
 
 system.on("@update", function ()
-  local screenWidth, screenHeight = love.graphics.getDimensions()
+  local screenWidth, screenHeight = system.getStorage("screenDimension").w, system.getStorage("screenDimension").h
   local mouseX, mouseY = love.mouse.getPosition()
   local relativeMouseX = mouseX - (screenWidth / 2)
   local relativeMouseY = mouseY - (screenHeight / 2)
