@@ -1,11 +1,22 @@
 system.on("@mouse:released", function (button)
+  table.sort(main.ui.world, function (a, b)
+    return a.renderLayer > b.renderLayer
+  end)
+
+  local hasClicked = false
   for _, ent in pairs(main.ui.world) do
     local mouse = system.getStorage("realMouse")
     if main.AABB_check(ent, mouse) then
       if ent.onClicked then
         ent.onClicked(ent, button)
+        hasClicked = true
+        break
       end
     end
+  end
+
+  if hasClicked == false then
+    system.call("noUIClicked", button)
   end
 end)
 
