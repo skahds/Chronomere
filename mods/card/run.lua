@@ -4,7 +4,10 @@ system.on("@update", function ()
     local screenW, screenH = system.getStorage("screenDimension").w, system.getStorage("screenDimension").h
     local cardWidth = cardUI.width
     local cardHeight = cardUI.height
-    cardUI.x= screenW/2 + (card.drawOrder*200) - #main.card.deck.hand*100 + cardWidth/2
+    local distanceEachCard = 200/(#main.card.deck.hand/2+1)
+    local orderOffset = (card.drawOrder+0.5)*distanceEachCard
+    local leftOffset = -#main.card.deck.hand*(distanceEachCard/2)
+    cardUI.x= screenW/2 + orderOffset + leftOffset - cardWidth/2
     cardUI.y=screenH-cardHeight/2
   end
   if main.card.deck.selection then
@@ -25,4 +28,19 @@ system.on("noUIClicked", function (button)
       main.card.play()
     end
   end
+end)
+
+local function reOrderRenderLayer()
+  for _, card in pairs(main.card.deck.hand) do
+    local cardUI = card.cardUI
+    cardUI.renderLayer = 120 + card.drawOrder
+  end
+end
+
+system.on("drawCard", function ()
+  reOrderRenderLayer()
+end)
+
+system.on("cardDiscarded", function ()
+  reOrderRenderLayer()
 end)

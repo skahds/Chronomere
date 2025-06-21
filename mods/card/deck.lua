@@ -66,6 +66,7 @@ function main.card.discard(card)
       c.drawOrder = c.drawOrder - 1
     end
   end
+  system.call("cardDiscarded", card)
 
   table.insert(deck.discard, card)
   table.remove(deck.hand, card.drawOrder+1)
