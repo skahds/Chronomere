@@ -13,8 +13,8 @@ function love.load()
 end
 
 function love.update(dt)
-  system.call("@update")
   system.updateStorage("dt", dt)
+  system.call("@update")
 end
 
 function love.draw()

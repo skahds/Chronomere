@@ -23,10 +23,10 @@ function cam:setZoom(factor)
   self.zoom = factor
 end
 
-function cam:followEnt(ent)
+function cam:followPos(pos)
   system.on("@update", function ()
-    self.x = ent.x
-    self.y = ent.y
+    self.x = pos.x
+    self.y = pos.y
   end)
 end
 
