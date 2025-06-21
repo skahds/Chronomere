@@ -17,6 +17,7 @@ function basicEnt:init(args)
   self.width = self.width or self.defaultWidth or 0
   self.height = self.height or self.defaultHeight or 0
   self.tag = self.tag or {}
+  self.cameraFixed = self.cameraFixed or false
 end
 
 function basicEnt:draw()
@@ -28,11 +29,11 @@ function basicEnt:draw()
     local image = system.getImage(self.image)
     system.render(renderLayer, function ()
       love.graphics.draw(image, self.x, self.y)
-    end)
+    end, self.cameraFixed)
   else
     system.render(renderLayer, function ()
       love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
-    end)
+    end, self.cameraFixed)
   end
 end
 

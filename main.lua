@@ -19,8 +19,6 @@ end
 
 function love.draw()
   system.call("@renderer:render")
-  --later on will be used:
-  system.call("@renderer:renderOutsideCamera")
 end
 
 function love.keyreleased(key)

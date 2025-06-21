@@ -22,6 +22,7 @@ function main.ui.defineUI(id, eType)
     self.y = self.y or 0
     self.width = self.width or self.defaultWidth or 0
     self.height = self.height or self.defaultHeight or 0
+    self.cameraFixed = true
     self.tag = self.tag or {}
   end
 
@@ -34,11 +35,11 @@ function main.ui.defineUI(id, eType)
       local image = system.getImage(self.image)
       system.render(renderLayer, function ()
         love.graphics.draw(image, self.x, self.y)
-      end)
+      end, self.cameraFixed)
     else
       system.render(renderLayer, function ()
         love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
-      end)
+      end, self.cameraFixed)
     end
   end
 
