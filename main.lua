@@ -1,4 +1,5 @@
 system = {}
+main = {}
 
 require('broadcast')
 require('class')
