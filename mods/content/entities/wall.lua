@@ -6,4 +6,5 @@ function wall:init(args)
   basicEnt.init(self, args)
 
   self.color = {love.math.random(), love.math.random(), love.math.random()}
+  self.tag = {"wall", "env"}
 end

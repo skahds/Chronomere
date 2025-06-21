@@ -30,14 +30,14 @@ function basicEnt:draw()
     else
       love.graphics.setColor(1, 1, 1)
     end
-
+    
     if self.image then
       local image = system.getImage(self.image)
         love.graphics.draw(image, self.x, self.y)
+
     else
         love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
     end
-
   end, self.cameraFixed)
 end
 

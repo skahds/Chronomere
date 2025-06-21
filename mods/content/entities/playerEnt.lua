@@ -5,4 +5,5 @@ local basicEnt = main.entities.basicEnt
 function player:init(args)
   basicEnt.init(self, args)
 
+  self.tag = {"player"}
 end
