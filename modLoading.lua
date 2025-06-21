@@ -34,5 +34,6 @@ end
 -- Call the function for the folder you want to load files from
 requireFolder("mods/basicFunc")
 requireFolder("mods/renderer")
+requireFolder("mods/ui")
 requireFolder("mods/main")
 requireFolder("mods/content")
