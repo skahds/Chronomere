@@ -20,17 +20,17 @@ function basicEnt:init(args)
 end
 
 function basicEnt:draw()
+  local renderLayer = self.renderLayer or 1
   if self.color then
     love.graphics.setColor(self.color)
   end
   if self.image then
     local image = system.getImage(self.image)
-    system.render(1, function ()
+    system.render(renderLayer, function ()
       love.graphics.draw(image, self.x, self.y)
     end)
   else
-    system.render(1, function ()
-      -- print("hi", self.x, self.y, self.width, self.height)
+    system.render(renderLayer, function ()
       love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
     end)
   end

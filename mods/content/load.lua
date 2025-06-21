@@ -1,10 +1,12 @@
 system.on("@load", function ()
+  local cam = system.getStorage("camera")
   local ent1 = main.spawnEntity("basicEnt", {x=10, y=10, width=100, height=100, tag = {"env"}}, true)
   local ent2 = main.spawnEntity("basicEnt", {x=50, y=50, width=100, height=100, tag = {"env"}}, true)
-  local ent3 = main.spawnEntity("basicEnt", {x=70, y=30, width=100, height=100, tag = {"env"}}, true)
+  local ent3 = main.spawnEntity("basicEnt", {x=170, y=30, width=100, height=100, tag = {"env"}}, true)
   main.forAllEntCollision(ent1, {"env"}, function (targEnt)
     -- targEnt:delete()
   end)
 
   main.ui.spawnUI("test", {x=400, y=200})
+  cam:followEnt(ent3)
 end)

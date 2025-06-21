@@ -1,6 +1,6 @@
 system.on("@update", function ()
   local mousePosX, mousePosY = love.mouse.getPosition()
-  system.updateStorage("mouse", {x=mousePosX, y=mousePosY})
+  system.updateStorage("realMouse", {x=mousePosX, y=mousePosY})
 end)
 
 system.on("@update", function ()
