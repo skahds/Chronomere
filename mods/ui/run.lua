@@ -1,7 +1,7 @@
 system.on("@mouse:released", function (button)
-  table.sort(main.ui.world, function (a, b)
-    return a.renderLayer > b.renderLayer
-  end)
+  -- table.sort(main.ui.world, function (a, b)
+  --   return a.renderLayer > b.renderLayer
+  -- end)
 
   local hasClicked = false
   for _, ent in pairs(main.ui.world) do

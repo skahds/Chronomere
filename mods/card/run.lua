@@ -4,7 +4,7 @@ system.on("@update", function ()
     local screenW, screenH = system.getStorage("screenDimension").w, system.getStorage("screenDimension").h
     local cardWidth = cardUI.width
     local cardHeight = cardUI.height
-    cardUI.x= screenW/2 + (cardUI.drawOrder*200) - #main.card.deck.hand*100 + cardWidth/2
+    cardUI.x= screenW/2 + (card.drawOrder*200) - #main.card.deck.hand*100 + cardWidth/2
     cardUI.y=screenH-cardHeight/2
   end
   if main.card.deck.selection then
@@ -18,5 +18,11 @@ end)
 system.on("noUIClicked", function (button)
   if button == 2 then
     main.card.deselectCard()
+  end
+  if button == 1 then
+    local card = main.card.deck.selection
+    if card then
+      main.card.play()
+    end
   end
 end)

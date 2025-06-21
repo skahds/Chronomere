@@ -13,8 +13,8 @@ function card:draw()
 end
 
 function card:onDraw()
+  self.drawOrder = #main.card.deck.hand
   local screenW, screenH = system.getStorage("screenDimension").w, system.getStorage("screenDimension").h
   self.cardUI = main.ui.spawnUI("blank_card", {x=#main.card.deck.hand*200, y=screenH-150}, true)
-  self.cardUI.drawOrder = #main.card.deck.hand
   self.cardUI.card = self
 end

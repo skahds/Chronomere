@@ -33,25 +33,43 @@ function main.card.selectCard(card)
     card:onSelect()
     system.call("cardSelected", card)
   end
-  main.card.deck.selection = card
+  deck.selection = card
 end
 
 function main.card.deselectCard()
-  local card = main.card.deck.selection
+  local card = deck.selection
   if card and card.deSelect then
     card:deSelect()
     system.call("cardDeselected", card)
   end
-  main.card.deck.selection = nil
+  deck.selection = nil
 end
 
 function main.card.play()
-  if main.card.deck.selection then
-    main.card.deck.selection:onPlay()
-    system.call("cardPlayed", main.card.deck.selection)
+  local card = deck.selection
+  if card then
+    if card.onPlay then
+      card:onPlay()
+    end
+    system.call("cardPlayed", card)
+
+    main.card.discard(card)
+
+    main.card.deselectCard()
   end
-  table.insert(deck.discard, main.card.deck.selection)
-  table.remove(deck.hand, #deck.hand)
+end
+
+function main.card.discard(card)
+  local drawOrder = card.drawOrder
+  for _, c in pairs(deck.hand) do
+    if c.drawOrder > drawOrder then
+      c.drawOrder = c.drawOrder - 1
+    end
+  end
+
+  table.insert(deck.discard, card)
+  table.remove(deck.hand, card.drawOrder+1)
+  card.cardUI:delete()
 end
 
 function main.card.shuffleDiscardToDraw()
