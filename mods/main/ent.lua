@@ -8,7 +8,6 @@ function basicEnt:init(args)
     if type(k) == "table" then
       self[k] = utils.deepCopy(v)
     else
-      print(k, v)
       self[k] = v
     end
   end

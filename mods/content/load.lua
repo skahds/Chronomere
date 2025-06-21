@@ -1,3 +1,5 @@
 system.on("@load", function ()
-  main.spawnEntity("basicEnt", {x=10, y=10, width=100, height=100})
+  local ent1 = main.spawnEntity("basicEnt", {x=10, y=10, width=100, height=100}, true)
+  local ent2 = main.spawnEntity("basicEnt", {x=50, y=50, width=100, height=100, tag = {"env"}}, true)
+  print(main.checkEntCollision(ent1, ent2, {"env"}))
 end)
