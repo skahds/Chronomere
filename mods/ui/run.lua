@@ -1,17 +1,28 @@
 system.on("@mouse:released", function (button)
-  -- table.sort(main.ui.world, function (a, b)
-  --   return a.renderLayer > b.renderLayer
-  -- end)
+  -- for making sure that *only* the top gets clicked
+  local UIlist = {}
+  local UIkey = 0
 
   local hasClicked = false
   for _, ent in pairs(main.ui.world) do
     local mouse = system.getStorage("realMouse")
     if main.AABB_check(ent, mouse) then
       if ent.onClicked then
-        ent.onClicked(ent, button)
+        UIlist[ent.renderLayer] = {}
+        if UIkey < ent.renderLayer then
+          UIkey = ent.renderLayer
+        end
+        table.insert(UIlist[ent.renderLayer], ent)
+
         hasClicked = true
-        break
       end
+    end
+  end
+
+  local layer = UIlist[UIkey]
+  if layer then
+    for _, ent in pairs(layer) do
+      ent.onClicked(ent, button)
     end
   end
 
