@@ -14,3 +14,9 @@ system.on("@update", function ()
     card.cardUI.y=screenH-cardHeight
   end
 end)
+
+system.on("noUIClicked", function (button)
+  if button == 2 then
+    main.card.deselectCard()
+  end
+end)

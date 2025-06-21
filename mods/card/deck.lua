@@ -28,6 +28,7 @@ function main.card.drawCard()
 end
 
 function main.card.selectCard(card)
+  main.card.deselectCard()
   if card.onSelect then
     card:onSelect()
     system.call("cardSelected", card)
@@ -37,7 +38,7 @@ end
 
 function main.card.deselectCard()
   local card = main.card.deck.selection
-  if card.deSelect then
+  if card and card.deSelect then
     card:deSelect()
     system.call("cardDeselected", card)
   end
