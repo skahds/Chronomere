@@ -5,7 +5,12 @@ system.on("@mouse:released", function (button)
 
   local hasClicked = false
   for _, ent in pairs(main.ui.world) do
-    local mouse = system.getStorage("realMouse")
+    local mouse
+    if ent.cameraFixed then
+      mouse = system.getStorage("realMouse")
+    else
+      mouse = system.getStorage("mouse")
+    end
     if main.AABB_check(ent, mouse) then
       if ent.onClicked then
         UIlist[ent.renderLayer] = {}
