@@ -32,10 +32,10 @@ local function requireFolder(folder)
 end
 
 -- Call the function for the folder you want to load files from
-requireFolder("mods/basicFunc")
-requireFolder("mods/camera")
-requireFolder("mods/renderer")
-requireFolder("mods/ui")
-requireFolder("mods/main")
-requireFolder("mods/card")
-requireFolder("mods/content")
+requireFolder("src/basicFunc")
+requireFolder("src/camera")
+requireFolder("src/renderer")
+requireFolder("src/ui")
+requireFolder("src/main")
+requireFolder("src/card")
+requireFolder("src/content")
