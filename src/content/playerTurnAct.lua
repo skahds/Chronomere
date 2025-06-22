@@ -12,6 +12,7 @@ function main.actionEnd()
   player.moveOrder[currentAction] = nil
   if player.moveOrder[currentAction+1] then
     player.moveOrder[currentAction+1].action()
+  else
     system.call("endTurn")
   end
   
@@ -25,5 +26,14 @@ system.on("startTurn", function ()
     if move then
       move.action()
     end
+  end
+end)
+
+system.on("endTurn", function ()
+  local preview = system.getStorage("previewPlayer")
+  local player = system.getStorage("player")
+  if preview then
+    preview.x = player.x
+    preview.y = player.y
   end
 end)

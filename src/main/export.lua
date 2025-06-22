@@ -28,7 +28,11 @@ end
 function main.forAllEntCollision(ent, tag, func)
   for _, targEnt in pairs(main.world) do
     if ent.index ~= targEnt.index and main.checkEntCollision(ent, targEnt, tag) then
-      func(targEnt)
+      if func then
+        func(targEnt)
+      else
+        return true
+      end
     end
   end
 end
