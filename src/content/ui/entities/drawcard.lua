@@ -3,10 +3,7 @@ main.ui.defineUI("draw_card", {
   height = 100,
   image = "draw_card",
   onClicked = function (ent, button)
-    local mouse = system.getStorage("realMouse")
-    if main.AABB_check(ent, mouse) then
-      main.card.addCardToDeck("card")
-      main.card.drawCard()
-    end
+    main.card.addCardToDeck("move_card")
+    main.card.drawCard()
   end
 })

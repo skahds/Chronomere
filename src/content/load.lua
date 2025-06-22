@@ -5,9 +5,12 @@ system.on("@load", function ()
   local ent2 = main.spawnEntity("wall", {x=50, y=50, width=100, height=100}, true)
 
   local player = main.spawnEntity("player", {x=270, y=30, width=100, height=100}, true)
+  system.updateStorage("player", player)
+  system.updateStorage("controlledPlayer", player)
   main.forAllEntCollision(ent1, {"env"}, function (targEnt)
     -- targEnt:delete()
   end)
 
-  main.ui.spawnUI("draw_card", {x=400, y=150, card="moveRook"})
+  main.ui.spawnUI("start_turn", {x=500, y=50})
+  main.ui.spawnUI("draw_card", {x=500, y=150, card="moveRook"})
 end)

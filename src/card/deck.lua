@@ -84,7 +84,7 @@ end
 function main.card.addCardToDeck(card)
   local card = card
   if type(card) == "string" then
-    card = main.entities[card]:new({})
+    card = main.spawnEntity(card, {}, true)
   end
   table.insert(deck.draw, card)
 end
