@@ -7,12 +7,20 @@ function player:init(args)
 
   self.tag = {"player"}
   self.moveOrder = {}
-  -- self.isPreview = args.isPreview or false
+  self.isPreview = args.isPreview or false
+
+  if self.isPreview then
+    self.color = {1, 1, 1, 0.4}
+  end
 end
 
 function player:moveTo(pos)
-  table.insert(self.moveOrder, {type="move", location=pos})
-  -- if self.isPreview then
-    
-  -- end
+  if self.isPreview then
+    self.x = pos.x
+    self.y = pos.y
+    local realPlayer = system.getStorage("player")
+    table.insert(realPlayer.moveOrder, {type="move", location=pos})
+  else
+    table.insert(self.moveOrder, {type="move", location=pos})
+  end
 end

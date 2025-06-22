@@ -22,9 +22,10 @@ end
 function card:draw()
   originalCard.draw(self)
   if self.isSelected then
-    local player = system.getStorage("player")
+    local player = system.getStorage("previewPlayer")
     local offset = getClosest(player)
     system.render(9, function ()  
+      love.graphics.setColor(0.1, 0.8, 0.1)
       love.graphics.rectangle("fill", player.x+offset.x, player.y+offset.y, player.width, player.height)
     end)
   end
@@ -43,9 +44,9 @@ function card:onDeselect()
 end
 
 function card:onPlay()
-  local player = system.getStorage("controlledPlayer")
-  local moveDelta = getClosest(player)
   self.isSelected = false
+  local player = system.getStorage("previewPlayer")
+  local moveDelta = getClosest(player)
 
   if player and player.moveTo then
     player:moveTo({x=player.x+moveDelta.x, y=player.y+moveDelta.y})
