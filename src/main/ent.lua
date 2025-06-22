@@ -18,7 +18,7 @@ function basicEnt:init(args)
   self.height = self.height or self.defaultHeight or 0
   self.tag = self.tag or {}
   self.cameraFixed = self.cameraFixed or false
-  self.renderLayer = self.renderLayer or 1
+  self.renderLayer = self.renderLayer or 10
 end
 
 function basicEnt:draw()
