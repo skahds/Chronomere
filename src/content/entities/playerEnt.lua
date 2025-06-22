@@ -8,19 +8,59 @@ function player:init(args)
   self.tag = {"player"}
   self.moveOrder = {}
   self.isPreview = args.isPreview or false
+  self.speed = args.speed or 300
 
   if self.isPreview then
     self.color = {1, 1, 1, 0.4}
   end
 end
 
+function player:update()
+  -- since basicEnt doesn't have update rn
+  if basicEnt.update then
+    basicEnt.update(self)
+  end
+
+  if self.moveUpdate then
+    self.moveUpdate()
+  end
+end
+
 function player:moveTo(pos)
+  -- self.x is based on it's early one
+  local originalX = self.x
+  local originalY = self.y
   if self.isPreview then
-    self.x = pos.x
-    self.y = pos.y
-    local realPlayer = system.getStorage("player")
-    table.insert(realPlayer.moveOrder, {type="move", location=pos})
+    self.x = pos.x + originalX
+    self.y = pos.y + originalY
   else
-    table.insert(self.moveOrder, {type="move", location=pos})
+    table.insert(self.moveOrder, {type="move", action=function ()
+        local originalX = self.x
+        local originalY = self.y
+        local targPosX = pos.x + originalX
+        local targPosY = pos.y + originalY
+      self.moveUpdate = function ()
+        if self.x < targPosX then
+          self.x = self.x + self.speed * system.getStorage("dt")
+        elseif self.x > targPosX then
+          self.x = self.x - self.speed * system.getStorage("dt")
+        end
+        if math.abs(self.x - targPosX) < 2 then
+          self.x = targPosX
+        end
+
+        if self.y < targPosY then
+          self.y = self.y + self.speed * system.getStorage("dt")
+        elseif self.y > targPosY then
+          self.y = self.y - self.speed * system.getStorage("dt")
+        end
+        if math.abs(self.y - targPosY) < 2 then
+          self.y = targPosY
+        end
+        if self.x == targPosX and self.y == targPosY then
+          main.actionEnd()
+        end
+      end
+    end})
   end
 end

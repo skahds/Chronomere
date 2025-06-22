@@ -38,8 +38,8 @@ end
 
 function main.card.deselectCard()
   local card = deck.selection
-  if card and card.deSelect then
-    card:deSelect()
+  if card and card.onDeselect then
+    card:onDeselect()
     system.call("cardDeselected", card)
   end
   deck.selection = nil

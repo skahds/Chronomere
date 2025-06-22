@@ -47,8 +47,5 @@ function card:onPlay()
   self.isSelected = false
   local player = system.getStorage("previewPlayer")
   local moveDelta = getClosest(player)
-
-  if player and player.moveTo then
-    player:moveTo({x=player.x+moveDelta.x, y=player.y+moveDelta.y})
-  end
+  main.card.actToPlayer("moveTo", {x=moveDelta.x, y=moveDelta.y})
 end

@@ -1,16 +1,29 @@
---movement
+-- should this be a different name?
+function main.actionEnd()
+  local player = system.getStorage("player")
+  player.moveUpdate = nil
+  local currentAction = 0
+  while true do
+    currentAction = currentAction + 1
+    if player.moveOrder[currentAction] then
+      break
+    end
+  end
+  player.moveOrder[currentAction] = nil
+  if player.moveOrder[currentAction+1] then
+    player.moveOrder[currentAction+1].action()
+    system.call("endTurn")
+  end
+  
+end
+
+--
 system.on("startTurn", function ()
   local player = system.getStorage("player")
   if #player.moveOrder > 0 then
-    print(#player.moveOrder)
-    for i, action in ipairs(player.moveOrder) do
-      print("yo", action)
-      if action.type == "move" then
-        player.x = action.location.x
-        player.y = action.location.y
-      end
-
-      player.moveOrder[i] = nil
+    local move = player.moveOrder[1]
+    if move then
+      move.action()
     end
   end
 end)
