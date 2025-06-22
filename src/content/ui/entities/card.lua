@@ -4,9 +4,13 @@ main.ui.defineUI("blank_card", {
   image = "blank_card",
   renderLayer = 120,
   onClicked = function (ent, button)
-    local mouse = system.getStorage("realMouse")
     if ent.card then
-      main.card.selectCard(ent.card)
+      if (main.card.deck.selection == nil) or (ent.card.drawOrder ~= main.card.deck.selection.drawOrder) then
+        main.card.selectCard(ent.card)
+      else
+        main.card.deselectCard()
+      end
+
     end
   end
 })
