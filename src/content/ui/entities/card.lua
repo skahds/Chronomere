@@ -12,5 +12,12 @@ main.ui.defineUI("blank_card", {
       end
 
     end
+  end,
+  onDraw = function (ent)
+    if ent.card and ent.card.name then
+      system.render(ent.renderLayer, function ()
+        love.graphics.print(ent.card.name, ent.x+10, ent.y+10)
+      end, true)
+    end
   end
 })

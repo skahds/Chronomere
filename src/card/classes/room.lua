@@ -12,8 +12,8 @@ local originalCard = main.entities.card
 function card:init(args)
   originalCard.init(self, args)
   self.isSelected = false
-  self.width = args.width or 100
-  self.height = args.height or 100
+  self.width = args.width or 130
+  self.height = args.height or 130
 end
 
 function card:draw()

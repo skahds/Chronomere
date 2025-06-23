@@ -3,7 +3,11 @@ main.ui.defineUI("draw_card", {
   height = 100,
   image = "draw_card",
   onClicked = function (ent, button)
-    main.card.addCardToDeck("room_card")
+    if love.math.random() > 0.5 then
+      main.card.addCardToDeck("room_card")
+    else
+      main.card.addCardToDeck("move_card")
+    end
     main.card.drawCard()
   end
 })

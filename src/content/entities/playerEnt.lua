@@ -83,7 +83,7 @@ function player:room(pos)
       local timer = 0
       self.moveUpdate = function ()
         timer = timer + system.getStorage("dt")
-        if timer > 1 then
+        if timer > 0.4 then
           main.actionEnd()
         end
       end

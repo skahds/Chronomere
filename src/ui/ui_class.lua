@@ -45,6 +45,10 @@ function main.ui.defineUI(id, eType)
       end
 
     end, self.cameraFixed)
+
+    if self.onDraw then
+      self:onDraw()
+    end
   end
 
 
