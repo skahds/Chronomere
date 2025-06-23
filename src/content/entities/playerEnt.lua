@@ -39,31 +39,22 @@ function player:moveTo(pos)
       local originalY = self.y
       local targPosX = pos.x + originalX
       local targPosY = pos.y + originalY
-      local xv = 0
-      local yv = 0
+      local direction = math.atan2(targPosY - originalY, targPosX - originalX)
       self.moveUpdate = function ()
-        -- ill make this correctly later
-        if self.x < targPosX then
-          xv = self.speed * system.getStorage("dt")
-        elseif self.x > targPosX then
-          xv = -self.speed * system.getStorage("dt")
-        end
-
-        if self.y < targPosY then
-          yv = self.speed * system.getStorage("dt")
-        elseif self.y > targPosY then
-          yv = -self.speed * system.getStorage("dt")
-        end
-
-        if math.abs(self.x - targPosX) < 2 then
-          xv = targPosX - self.x
-        end
-        if math.abs(self.y - targPosY) < 2 then
-          yv = targPosY - self.y
-        end
+        local xv = 0
+        local yv = 0
+        
+        xv = math.cos(direction)*self.speed * system.getStorage("dt")
+        yv = math.sin(direction)*self.speed * system.getStorage("dt")
 
         self.x = self.x + xv
         self.y = self.y + yv
+        
+        -- snapping
+        if math.abs(targPosX - self.x) < math.abs(xv*2)+1 and math.abs(targPosY - self.y) < math.abs(yv*2)+1 then
+          self.x = targPosX
+          self.y = targPosY
+        end
 
         if main.forAllEntCollision(self, {"wall"}) then
           self.x = self.x - xv
