@@ -69,3 +69,19 @@ function utils.shuffle(array)
 
     return output
 end
+
+function utils.getRectIntersection(r1, r2)
+    local x1 = math.max(r1.x, r2.x)
+    local y1 = math.max(r1.y, r2.y)
+    local x2 = math.min(r1.x + r1.width, r2.x + r2.width)
+    local y2 = math.min(r1.y + r1.height, r2.y + r2.height)
+
+    local width = x2 - x1
+    local height = y2 - y1
+
+    if width > 0 and height > 0 then
+        return {x = x1, y = y1, width = width, height = height}
+    else
+        return nil
+    end
+end
