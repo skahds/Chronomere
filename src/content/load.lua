@@ -2,9 +2,7 @@ love.graphics.setBackgroundColor(1/3, 1/3, 1/3)
 
 system.on("@load", function ()
   local ent1 = main.spawnEntity("wall", {x=20, y=10, width=100, height=100}, true)
-  local ent2 = main.spawnEntity("wall", {x=30, y=15, width=20, height=50}, true)
-  ent1:cut(ent2)
-  ent2:delete()
+  local ent2 = main.spawnEntity("wall", {x=120, y=15, width=50, height=70}, true)
 
   local player = main.spawnEntity("player", {x=270, y=30, width=100, height=100}, true)
   local preview = main.spawnEntity("player", {x=270, y=30, width=100, height=100, isPreview = true}, true)

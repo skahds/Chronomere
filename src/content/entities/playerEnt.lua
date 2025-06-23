@@ -69,3 +69,24 @@ function player:moveTo(pos)
     end})
   end
 end
+
+
+
+function player:room(pos)
+  if self.isPreview then
+
+  else
+    table.insert(self.moveOrder, {type="move", action=function ()
+      main.forAllEntCollision(pos, {"wall"}, function (ent)
+        ent:cut(pos)
+      end)
+      local timer = 0
+      self.moveUpdate = function ()
+        timer = timer + system.getStorage("dt")
+        if timer > 1 then
+          main.actionEnd()
+        end
+      end
+    end})
+  end
+end
