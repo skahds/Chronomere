@@ -40,30 +40,34 @@ function player:moveTo(pos)
       local targPosX = pos.x + originalX
       local targPosY = pos.y + originalY
       local direction = math.atan2(targPosY - originalY, targPosX - originalX)
+      local timer = 0
       self.moveUpdate = function ()
-        local xv = 0
-        local yv = 0
-        
-        xv = math.cos(direction)*self.speed * system.getStorage("dt")
-        yv = math.sin(direction)*self.speed * system.getStorage("dt")
+        timer = timer + system.getStorage("dt")
+        if timer > 0.4 then
+          local xv = 0
+          local yv = 0
+          
+          xv = math.cos(direction)*self.speed * system.getStorage("dt")
+          yv = math.sin(direction)*self.speed * system.getStorage("dt")
 
-        self.x = self.x + xv
-        self.y = self.y + yv
-        
-        -- snapping
-        if math.abs(targPosX - self.x) < math.abs(xv*2)+1 and math.abs(targPosY - self.y) < math.abs(yv*2)+1 then
-          self.x = targPosX
-          self.y = targPosY
-        end
+          self.x = self.x + xv
+          self.y = self.y + yv
+          
+          -- snapping
+          if math.abs(targPosX - self.x) < math.abs(xv*2)+1 and math.abs(targPosY - self.y) < math.abs(yv*2)+1 then
+            self.x = targPosX
+            self.y = targPosY
+          end
 
-        if main.forAllEntCollision(self, {"wall"}) then
-          self.x = self.x - xv
-          self.y = self.y - yv
-          main.actionEnd()
-        end
+          if main.forAllEntCollision(self, {"wall"}) then
+            self.x = self.x - xv
+            self.y = self.y - yv
+            main.actionEnd()
+          end
 
-        if self.x == targPosX and self.y == targPosY then
-          main.actionEnd()
+          if self.x == targPosX and self.y == targPosY then
+            main.actionEnd()
+          end
         end
       end
     end})
@@ -77,13 +81,13 @@ function player:room(pos)
 
   else
     table.insert(self.moveOrder, {type="move", action=function ()
-      main.forAllEntCollision(pos, {"wall"}, function (ent)
-        ent:cut(pos)
-      end)
       local timer = 0
       self.moveUpdate = function ()
         timer = timer + system.getStorage("dt")
         if timer > 0.4 then
+          main.forAllEntCollision(pos, {"wall"}, function (ent)
+            ent:cut(pos)
+          end)
           main.actionEnd()
         end
       end
