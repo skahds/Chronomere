@@ -17,6 +17,7 @@ local originalCard = main.entities.card
 function card:init(args)
   originalCard.init(self, args)
   self.isSelected = false
+  self.cardUIID = "move_card"
 end
 
 function card:draw()

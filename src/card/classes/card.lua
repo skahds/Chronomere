@@ -15,7 +15,7 @@ end
 function card:onDraw()
   self.drawOrder = #main.card.deck.hand
   local screenW, screenH = system.getStorage("screenDimension").w, system.getStorage("screenDimension").h
-  self.cardUI = main.ui.spawnUI("blank_card", {x=#main.card.deck.hand*200, y=screenH-150}, true)
+  self.cardUI = main.ui.spawnUI(self.cardUIID or "move_card", {x=#main.card.deck.hand*200, y=screenH-150}, true)
   self.cardUI.card = self
   self.cardUI.renderLayer = 120 + self.drawOrder
 end

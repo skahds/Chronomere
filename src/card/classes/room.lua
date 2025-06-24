@@ -14,6 +14,7 @@ function card:init(args)
   self.isSelected = false
   self.width = args.width or 130
   self.height = args.height or 130
+  self.cardUIID = "room_card"
 end
 
 function card:draw()

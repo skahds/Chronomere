@@ -65,5 +65,5 @@ function main.ui.defineUI(id, eType)
     end
   end
 
-  main.entities[id] = ent
+  main.ui.entities[id] = ent
 end
